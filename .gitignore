@@ -1,4 +1,7 @@
 /temp
 *.log
+.project
+/.settings
+/bin
 /.vscode
 /target
