@@ -63,3 +63,71 @@ Multiple repositories allowed in Maven setup.
 ### Plugin repositories
 
 Identical to Dependency Repositories, but just deals with Plugins. Will only look for Plugins, by design usually a separate repository.
+
+## Plugins
+
+### Goals
+
+The default goals are plugins configured in the maven install. Things like `clean`, `compile`, `test`, `package`, `install`, and `deploy`.
+
+Super pom has these goals defined in it, which are added to users' effective pom.
+
+Goals are always tied to a phase.
+
+### Phases
+
+1. validate: validate the project is correct and all necessary information is available
+2. compile: compile the source code of the project
+3. test: test the compiled source code
+4. package: pachages all the code in its defined package type, like `jar`
+5. integration-test: deploy and run integration test (function after maven 3)
+6. verify: run checks against package to verify integrity
+7. install: install the package in our local repo
+8. deploy: copy final package to a remote repository
+
+### Compiler Plugin
+
+Used to compile source code, which invokes `javac` with the classpath set from the dependencies.
+
+Default to Java 1.5 regardless of what JDK is installed.
+
+Configuration section allows customization
+
+- Includes/Excludes
+- Fork
+- Memory
+- Source/target
+
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>2.5.1</version>
+    <configuration>
+        <fork>true</fork>
+        <meminitial>128m</meminitial>
+        <maxmem>512m</maxmem>
+        <source>1.8</source>
+        <target>1.8</target>
+    </configuration>
+</plugin>
+```
+
+### Jar Plugin
+
+Used to package code into a jar, which is tied to the package phase.
+
+Configuration section allows customization:
+
+- Includes/Excludes
+- Manifest
+
+### Source Plugin
+
+Used to attach source code to a jar, tied to the package phase in default but often overridden to a later phase.
+
+### Javadoc Plugin
+
+Used to attach Javadocs to a jar, tied to the package phase in default but often overridden to a later phase.
+
+Usually just use the defaults, but many customization optios for Javadoc format. [REF](https://maven.apache.org/plugins/maven-javadoc-plugin/)
