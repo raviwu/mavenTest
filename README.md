@@ -45,3 +45,21 @@ The type of pom is referred to as a dependency pom. Maven downloads dependencies
 - test: only available for the test compilation and execution phase
 - system: similar to provided, you specify a path to the jar on your file system (rarely use)
 - import: related to dependencyManagement
+
+## Repository
+
+### Local repository
+
+Local repo is where maven stores everything it downloads, default directory is `~/.m2`. It stores artifacts using the information that you provided for artifactId, groupId, and version.
+
+### Maven repositories
+
+Maven repositories is a http accessible location that user download files from.
+
+Default location is http://repo.maven.apache.org/maven2, most open source projects can be found here.
+
+Multiple repositories allowed in Maven setup.
+
+### Plugin repositories
+
+Identical to Dependency Repositories, but just deals with Plugins. Will only look for Plugins, by design usually a separate repository.
